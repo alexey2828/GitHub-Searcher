@@ -2,9 +2,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-
 interface IUseHttpGet<T> {
-    data?: T | null;
+    data: T | null;
     error?: Error | null;
     isLoading: boolean;
     updateResponse: (url: string) => void;
@@ -28,7 +27,6 @@ export function useHttpGet<T>(): IUseHttpGet<T> {
     useEffect(() => {
         fetch();
     }, [url]);
-    console.log(url)
 
     async function fetch() {
         setIsLoading(true);
