@@ -15,11 +15,9 @@ const UserPage: React.FC = () => {
     const { data, error, isLoading, updateResponse } = useHttpGet<IUser>();
 
     useEffect(() => {        
-        new Promise(() => {
-            setTimeout(() => {     
-                updateResponse(EUrl.CommonUrl + EUrlParams.Users + '/' + user.id);
-            }, 400);
-          });
+        setTimeout(() => {     
+            updateResponse(EUrl.CommonUrl + EUrlParams.Users + '/' + user.id);
+        }, 300);
     }, []);
 
     return (

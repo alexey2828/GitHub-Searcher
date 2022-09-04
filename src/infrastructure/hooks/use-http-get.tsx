@@ -31,13 +31,13 @@ export function useHttpGet<T>(): IUseHttpGet<T> {
     console.log(url)
 
     async function fetch() {
-        resetError();
         setIsLoading(true);
+        resetError();
         try {
           const response = await axios.get(url);
           if(response.data){
-            resetError();
             setData(response.data);
+            resetError();
           }
         setIsLoading(false);
         } catch (e: any) {

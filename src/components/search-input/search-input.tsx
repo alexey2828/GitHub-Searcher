@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useEffect, useState } from "react";
+import { EEntityType } from "../../const/entity-type";
 import { EUrlParams } from "../../const/urls";
 import { useHttpGet } from "../../infrastructure/hooks/use-http-get";
 import { List } from "../../infrastructure/lists/list";
@@ -26,23 +27,21 @@ const SearchInput: FC<ISearchInputProps> = ({url, params, type}: ISearchInputPro
     };
 
     useEffect(() => {        
-        new Promise(() => {
-            setTimeout(() => {
-                if (name === '/'){
-                    setName('');
-                }            
-                switch(type) {
-                    case 'User':
-                        return updateResponse(url + EUrlParams.Users + name + (params?.firstParam ? params.firstParam: ''));
-                    case 'Repos':
-                        return updateResponse(
-                            name === ''? url + EUrlParams.Users + '/' + params?.secondParam + EUrlParams.Repos :
-                            url + EUrlParams.Repos + '/' + (params?.secondParam ? params.secondParam: '') + name
-                        );
-                }
-                
-            }, 400);
-          });
+        setTimeout(() => {
+            if (name === '/'){
+                setName('');
+            }            
+            switch(type) {
+                case EEntityType.User:
+                    return updateResponse(url + EUrlParams.Users + name + (params?.firstParam ? params.firstParam: ''));
+                case EEntityType.Repos:
+                    return updateResponse(
+                        name === ''? url + EUrlParams.Users + '/' + params?.secondParam + EUrlParams.Repos :
+                        url + EUrlParams.Repos + '/' + (params?.secondParam ? params.secondParam: '') + name
+                    );
+            }
+            
+        }, 300);
     }, [name]);
 
     return (
